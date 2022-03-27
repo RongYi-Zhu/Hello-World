@@ -24,6 +24,8 @@ public:
     Tree(Treenode* _root){root = _root;}
     Tree(vector<int> value);
 
+    vector<int> preordertravese();
+
 private:
     Treenode* root;
 };
@@ -61,10 +63,98 @@ Tree::Tree(vector<int> value)
     }
 }
 
+vector<int> Tree::preordertravese()
+{
+    vector<int> ans;
+    stack<Treenode*> stk;
+    Treenode* ptr = root;
+
+    while(!stk.empty() || ptr != nullptr)
+    {
+        if (ptr != nullptr)
+        {
+            stk.push(ptr);
+            ans.push_back(ptr->val);
+            ptr=ptr->left;
+        }
+        else
+        {
+            ptr = stk.top()->right;
+            stk.pop();
+        }
+    }
+    return ans;
+}
+
+class Solution {
+public:
+    string bfs(vector<string>& words, int index)
+    {
+        vector<string> que;
+        que.push_back(words[index]);
+        int trigger = 1;
+
+        while(trigger != 0)
+        {
+            trigger = 0;                    //注意trigger位置，用于控制下轮大迭代的变量因置于大迭代位置
+            
+            int len = que.size();
+            for(int i=0; i<len; i++)
+            {
+                string base = que[i]; 
+                for (int j=0; j<words.size(); j++)
+                {
+                    if (words[j].size() - 1 == base.size() 
+                        && words[j].substr(0,base.size()) == base)
+                    {
+                        que.push_back(words[j]);
+                        trigger = 1;
+                    }    
+                }
+            }
+            if (trigger == 0)
+                break;
+            else
+            {
+                for(int i=0; i<len; i++)
+                {
+                    vector<string>::iterator ptr = que.begin();
+                    que.erase(ptr+i);
+                }
+            }
+        }
+        string ans = "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz";
+        for(int i=0; i<que.size(); i++)
+        {
+            if(que[i] < ans)
+                ans = que[i];
+        }
+        return ans;
+    }
+
+    string longestWord(vector<string>& words) 
+    {
+        string back = "";
+        for(int i=0; i<words.size(); i++)
+        {
+            if (words[i].size() == 1)
+            {
+                string temp = bfs(words, i);
+                if (temp > back)
+                    back = temp;
+            }
+        }
+        return back;
+    }
+};
+
 
 int main()
 {
-    vector<int> val = {3,9,20,NULL,NULL,15,7};
-    Tree t(val);
-    cout<<true<<endl;
+    vector<int> temp = {1,2,3,NULL,4};
+    long
+    Tree test(temp);
+    vector<int> ans = test.preordertravese();
+    cout<<"exit"<<endl;
 }
+
