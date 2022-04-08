@@ -28,8 +28,8 @@ public:
         queue<Node*> que;
         vector<vector<int>> ans;
         Node* ptr = root;
-
-        que.push(ptr);
+        if (root != nullptr)
+            que.push(ptr);
         while ( !que.empty() )
         {
             vector<int> temp;
@@ -39,8 +39,8 @@ public:
                 temp.push_back(que.front()->val);
                 for(int j=0; j<que.front()->children.size(); j++)
                 {
-                    if (que.front()->children[i] != nullptr)
-                        que.push(que.front()->children[i]);
+                    if (que.front()->children[j] != nullptr)        //注意此处循环符号,下同
+                        que.push(que.front()->children[j]);
                 }
                 que.pop();
             }
