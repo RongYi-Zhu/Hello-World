@@ -152,7 +152,6 @@ public:
 int main()
 {
     vector<int> temp = {1,2,3,NULL,4};
-    long
     Tree test(temp);
     vector<int> ans = test.preordertravese();
     cout<<"exit"<<endl;

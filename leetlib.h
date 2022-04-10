@@ -28,4 +28,15 @@ private:
     Treenode* root;
 };
 
+class ListNode
+{
+public:
+ListNode() : val(0), next(nullptr) {}
+ListNode(int x) : val(x), next(nullptr) {}
+ListNode(int x, ListNode *next) : val(x), next(next) {}
+
+int val;
+ListNode* next;
+};
+
 #endif
